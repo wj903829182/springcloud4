@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/consumerrocketmq/consumerrocketmq.iml" filepath="$PROJECT_DIR$/consumerrocketmq/consumerrocketmq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/productrocketmq/productrocketmq.iml" filepath="$PROJECT_DIR$/productrocketmq/productrocketmq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/registercenter/registercenter.iml" filepath="$PROJECT_DIR$/registercenter/registercenter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/springcloud4.iml" filepath="$PROJECT_DIR$/springcloud4.iml" />
+    </modules>
+  </component>
+</project>
