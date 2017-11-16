@@ -1,8 +1,15 @@
 server:
   port: 9091
+spring:
+  application:
+    name: productrocketmq
 
 
-
-
+eureka:
+ client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
 
 
