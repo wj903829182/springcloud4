@@ -6,6 +6,7 @@ import com.alibaba.rocketmq.common.message.Message;
 
 /**
  * Created by jack on 2017/11/22.
+ * http://www.jianshu.com/p/453c6e7ff81c
  */
 public class Producer {
     public static void main(String[] args){
