@@ -8,6 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 /**
  * http://blog.csdn.net/qq_22841811/article/details/67783473
@@ -27,7 +28,7 @@ public class ProductrocketmqApplication implements CommandLineRunner {
 	 */
 	@Override
 	public void run(String... strings) throws Exception {
-		System.out.println("run........begin");
+		/*System.out.println("run........begin");
 		DefaultMQProducer defaultMQProducer = new DefaultMQProducer();
 		Message msg = new Message("TEST",// topic
 				"TEST",// tag
@@ -36,6 +37,6 @@ public class ProductrocketmqApplication implements CommandLineRunner {
 		);
 		SendResult result = defaultMQProducer.send(msg);
 		System.out.println(result);
-		DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();
+		DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();*/
 	}
 }
