@@ -9,12 +9,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * http://blog.csdn.net/qq_22841811/article/details/67783473
  */
 @SpringBootApplication
 @EnableDiscoveryClient
+//@EnableTransactionManagement
 public class ProductrocketmqApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
