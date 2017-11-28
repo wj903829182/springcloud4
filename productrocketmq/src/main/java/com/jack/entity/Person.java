@@ -7,13 +7,13 @@ import javax.persistence.*;
 /**
  * Created by jack on 2017/11/27.
  */
-/*@NamedNativeQueries({
+@NamedNativeQueries({
         @NamedNativeQuery(
-                name = "",
-                query = "",
+                name = "Personall",
+                query = "select id,age,name from person p where p.age > ?1",
                 resultClass = PersonVO.class
         )
-})*/
+})
 @Entity
 public class Person {
     @Id

@@ -76,11 +76,11 @@ public class PersonController {
     @RequestMapping("/findAll")
     public JSONObject findAllPerson(Integer age) {
         JSONObject jsonObject = new JSONObject();
-        List<PersonVO> person = personRepository.selectAllPerson(age);
-        jsonObject.put("data",person);
-       /* Query query = entityManager.createNativeQuery("select id,age,name from person p where p.age > "+age, Map.class);
+        /*List<PersonVO> person = personRepository.selectAllPerson(age);
+        jsonObject.put("data",person);*/
+       Query query = entityManager.createNativeQuery("Person.all");
         List list = query.getResultList();
-        jsonObject.put("data",list);*/
+        jsonObject.put("data",list);
         return jsonObject;
     }
 
