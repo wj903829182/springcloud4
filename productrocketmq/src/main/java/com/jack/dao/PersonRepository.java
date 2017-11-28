@@ -21,6 +21,4 @@ public interface PersonRepository extends JpaRepository<Person,Integer> {
     @Query(value = "select new com.jack.vo.PersonVO(p.id,p.age,p.name) from Person p where p.age > ?1"/*,nativeQuery = true*/)
     List<PersonVO> selectAllPerson(Integer age);
 
-    List<PersonVO> Personall(Integer age);
-
 }
