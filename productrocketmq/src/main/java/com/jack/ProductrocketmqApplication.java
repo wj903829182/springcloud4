@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * http://blog.csdn.net/qq_22841811/article/details/67783473
+ * http://www.jianshu.com/p/8813ec02926a
  */
 @SpringBootApplication
 @EnableDiscoveryClient
