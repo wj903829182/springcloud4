@@ -14,6 +14,11 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 /**
  * http://blog.csdn.net/qq_22841811/article/details/67783473
  * http://www.jianshu.com/p/8813ec02926a
+ * http://blog.csdn.net/forearrow/article/details/47778497
+ * http://blog.csdn.net/tvwr8ofv0p/article/details/78293658
+ * http://blog.jobbole.com/89140/?spm=5176.100239.blogcont46662.3.KJJib1
+ * http://blog.csdn.net/gredn/article/details/73732871
+ * http://blog.csdn.net/gredn/article/details/73732861
  */
 @SpringBootApplication
 @EnableDiscoveryClient
