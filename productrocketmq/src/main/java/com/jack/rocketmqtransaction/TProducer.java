@@ -12,6 +12,8 @@ import java.util.Date;
  * Created by jack on 2017/11/30.
  * 事务消息生产者
  * http://www.jianshu.com/p/453c6e7ff81c
+ * http://www.jianshu.com/p/6868ddceaa5b
+ * https://www.jianshu.com/p/53324ea2df92
  * http://blog.csdn.net/column/details/learningrocketmq.html
  */
 public class TProducer {
