@@ -21,7 +21,8 @@ import java.util.List;
 public class TConsumer {
     public static void main(String[] args) {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("transactionConsumerGroup");
-        consumer.setNamesrvAddr("192.168.9.105:9876");
+        //consumer.setNamesrvAddr("192.168.9.114:9876");
+        consumer.setNamesrvAddr("localhost:9876");
         //程序第一次启动从消息队列头取数据
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         //订阅TransactionTopic下Tag为Tag的消息

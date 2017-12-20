@@ -17,7 +17,8 @@ import java.util.Date;
 public class TProducer {
     public static void main(String[] args) {
         TransactionMQProducer producer = new TransactionMQProducer("transactionProduceGroup");
-        producer.setNamesrvAddr("192.168.9.105:9876");
+        //producer.setNamesrvAddr("192.168.9.114:9876");
+        producer.setNamesrvAddr("localhost:9876");
         TransactionCheckListener transactionCheckListener = new TransactionCheckListenerImpl();
         //设置事务检查监听
         producer.setTransactionCheckListener(transactionCheckListener);
