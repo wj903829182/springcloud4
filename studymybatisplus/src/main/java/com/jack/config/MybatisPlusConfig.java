@@ -14,20 +14,14 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URI;
-import java.net.URL;
 
 /**
  * Created by jack on 2017/12/26.
@@ -35,15 +29,16 @@ import java.net.URL;
 @Configuration
 //@AutoConfigureAfter(DruidDataSourceConfig.class)
 //@MapperScan("com.jack.mapper*")
-public class MybatisPlusConfig {
+public class MybatisPlusConfig implements EnvironmentAware {
     /**
      * 注入环境变量的值
      */
-    @Autowired
+   /* @Autowired*/
     private Environment environment;
-    private DataSource dataSource;
-    @Bean("sqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(GlobalConfiguration globalConfiguration) throws Exception {
+   /* @Autowired
+    private DataSource dataSource;*/
+    @Bean/*("sqlSessionFactory")*/
+    public SqlSessionFactory sqlSessionFactory(DataSource dataSource,GlobalConfiguration globalConfiguration) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
         //设置xml的位置：
@@ -88,19 +83,19 @@ public class MybatisPlusConfig {
         return paginationInterceptor;
     }
 
-    /*@Bean
+    @Bean
     public MapperScannerConfigurer mapperScannerConfigurer(Environment environment){
-        String mapperLocation = "com.jack.mapper*";
+        String mapperLocation = "com.jack.mapper";
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
-        //mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
         mapperScannerConfigurer.setBasePackage(mapperLocation);
         return mapperScannerConfigurer;
-    }*/
+    }
 
-   /* @Bean
+   @Bean
     public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
+       System.out.println("environment -------------------"+environment);
         druidDataSource.setUrl(environment.getProperty("spring.datasource.url"));
         druidDataSource.setUsername(environment.getProperty("spring.datasource.username"));
         druidDataSource.setPassword(environment.getProperty("spring.datasource.password"));
@@ -118,6 +113,10 @@ public class MybatisPlusConfig {
         druidDataSource.setPoolPreparedStatements(Boolean.parseBoolean(environment.getProperty("spring.datasource.poolPreparedStatements")));
         druidDataSource.setMaxOpenPreparedStatements(Integer.parseInt(environment.getProperty("spring.datasource.maxOpenPreparedStatements")));
         return druidDataSource;
-    }*/
+    }
 
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
+    }
 }

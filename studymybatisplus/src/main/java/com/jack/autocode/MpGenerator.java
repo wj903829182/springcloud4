@@ -27,6 +27,7 @@ public class MpGenerator {
         gc.setOutputDir("F:\\mystudy\\springcloud4\\studymybatisplus\\src\\main\\java");
         gc.setFileOverride(true);
         //gc.setActiveRecord(true);// 不需要ActiveRecord特性的请改为false
+        gc.setActiveRecord(false);// 不需要ActiveRecord特性的请改为false
         gc.setEnableCache(false);// XML 二级缓存
         gc.setBaseResultMap(true);// XML ResultMap
         gc.setBaseColumnList(false);// XML columList
@@ -129,7 +130,7 @@ public class MpGenerator {
 
         // 关闭默认 xml 生成，调整生成 至 根目录
         TemplateConfig tc = new TemplateConfig();
-        //tc.setXml(null);
+        //tc.setXml("resources/mapper");
         mpg.setTemplate(tc);
 
         // 自定义模板配置，可以 copy 源码 mybatis-plus/src/main/resources/templates 下面内容修改，
