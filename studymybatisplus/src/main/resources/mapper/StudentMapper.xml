@@ -10,4 +10,8 @@
         <result column="note" property="note" />
     </resultMap>
 
+    <select id="findStudentById" parameterType="int" resultType="com.jack.entity.Student">
+        SELECT * FROM student s WHERE s.id = #{id}
+    </select>
+
 </mapper>

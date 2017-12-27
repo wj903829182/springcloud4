@@ -17,4 +17,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class StudentServiceImpl extends ServiceImpl<StudentMapper, Student> implements IStudentService {
 
+    @Override
+    public Student findStudentById(Integer id) {
+        return baseMapper.findStudentById(id);
+    }
+
+    @Override
+    public Student findStudentById2(Integer id) {
+        return baseMapper.findStudentById2(id);
+    }
 }

@@ -12,5 +12,6 @@ import com.baomidou.mybatisplus.service.IService;
  * @since 2017-12-27
  */
 public interface IStudentService extends IService<Student> {
-
+    Student findStudentById(Integer id);
+    Student findStudentById2(Integer id);
 }
