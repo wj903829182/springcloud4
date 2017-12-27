@@ -97,7 +97,6 @@ public class MybatisPlusConfig implements EnvironmentAware {
     @Bean
     public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
-       System.out.println("environment -------------------"+environment);
         druidDataSource.setUrl(environment.getProperty("spring.datasource.url"));
         druidDataSource.setUsername(environment.getProperty("spring.datasource.username"));
         druidDataSource.setPassword(environment.getProperty("spring.datasource.password"));
