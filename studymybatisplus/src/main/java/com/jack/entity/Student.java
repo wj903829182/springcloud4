@@ -10,7 +10,7 @@ import java.io.Serializable;
  * </p>
  *
  * @author jack
- * @since 2017-12-26
+ * @since 2017-12-27
  */
 public class Student implements Serializable {
 

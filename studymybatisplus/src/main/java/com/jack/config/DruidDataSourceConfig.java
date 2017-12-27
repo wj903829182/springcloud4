@@ -16,13 +16,13 @@ public class DruidDataSourceConfig {
     /**
      * 注入环境变量的值
      */
-    @Autowired
-    private Environment environment;
+   /* @Autowired
+    private Environment environment;*/
     /**
      * 获取数据源DataSource
      * @return
      */
-    @Bean
+    /*@Bean
     public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setUrl(environment.getProperty("spring.datasource.url"));
@@ -42,5 +42,5 @@ public class DruidDataSourceConfig {
         druidDataSource.setPoolPreparedStatements(Boolean.parseBoolean(environment.getProperty("spring.datasource.poolPreparedStatements")));
         druidDataSource.setMaxOpenPreparedStatements(Integer.parseInt(environment.getProperty("spring.datasource.maxOpenPreparedStatements")));
         return druidDataSource;
-    }
+    }*/
 }

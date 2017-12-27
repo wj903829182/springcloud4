@@ -13,7 +13,6 @@ import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -37,14 +36,17 @@ public class MybatisPlusConfig implements EnvironmentAware {
     private Environment environment;
    /* @Autowired
     private DataSource dataSource;*/
-    @Bean/*("sqlSessionFactory")*/
-    public SqlSessionFactory sqlSessionFactory(DataSource dataSource,GlobalConfiguration globalConfiguration) throws Exception {
+    @Bean("sqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory(DataSource druidDataSource, GlobalConfiguration globalConfiguration) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
-        sqlSessionFactory.setDataSource(dataSource);
+        //sqlSessionFactory.setDataSource(dataSource);
+        sqlSessionFactory.setDataSource(druidDataSource);
         //设置xml的位置：
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        //sqlSessionFactory.setMapperLocations(resolver.getResources("classpath:mapper*//**///*//**//*.xml"));
         sqlSessionFactory.setMapperLocations(resolver.getResources("classpath:mapper/**/*.xml"));
+        //sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(" classpath:mapper/**/*.xml"));
         //配置实体扫描路径，多个package可以用分号; 逗号, 分隔， 支持通配符*
         sqlSessionFactory.setTypeAliasesPackage("com.jack.entity");
         MybatisConfiguration configuration = new MybatisConfiguration();
@@ -83,7 +85,7 @@ public class MybatisPlusConfig implements EnvironmentAware {
         return paginationInterceptor;
     }
 
-    @Bean
+   @Bean
     public MapperScannerConfigurer mapperScannerConfigurer(Environment environment){
         String mapperLocation = "com.jack.mapper";
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
@@ -92,7 +94,7 @@ public class MybatisPlusConfig implements EnvironmentAware {
         return mapperScannerConfigurer;
     }
 
-   @Bean
+    @Bean
     public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
        System.out.println("environment -------------------"+environment);
