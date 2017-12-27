@@ -34,21 +34,17 @@ public class MybatisPlusConfig implements EnvironmentAware {
      */
    /* @Autowired*/
     private Environment environment;
-   /* @Autowired
-    private DataSource dataSource;*/
     @Bean("sqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(DataSource druidDataSource, GlobalConfiguration globalConfiguration) throws Exception {
         MybatisSqlSessionFactoryBean sqlSessionFactory = new MybatisSqlSessionFactoryBean();
-        //sqlSessionFactory.setDataSource(dataSource);
         sqlSessionFactory.setDataSource(druidDataSource);
         //设置xml的位置：
-        //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        //sqlSessionFactory.setMapperLocations(resolver.getResources("classpath:mapper*//**///*//**//*.xml"));
-        sqlSessionFactory.setMapperLocations(resolver.getResources("classpath:mapper/**/*.xml"));
+        //设置xml文件的路径
+        sqlSessionFactory.setMapperLocations(resolver.getResources(environment.getProperty("mybatis-plus.mapper-locations")));
         //sqlSessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver().getResources(" classpath:mapper/**/*.xml"));
         //配置实体扫描路径，多个package可以用分号; 逗号, 分隔， 支持通配符*
-        sqlSessionFactory.setTypeAliasesPackage("com.jack.entity");
+        sqlSessionFactory.setTypeAliasesPackage(environment.getProperty("mybatis-plus.typeAliasesPackage"));
         MybatisConfiguration configuration = new MybatisConfiguration();
         configuration.setDefaultScriptingLanguage(MybatisXMLLanguageDriver.class);
         configuration.setJdbcTypeForNull(JdbcType.NULL);
@@ -87,33 +83,11 @@ public class MybatisPlusConfig implements EnvironmentAware {
 
    @Bean
     public MapperScannerConfigurer mapperScannerConfigurer(Environment environment){
-        String mapperLocation = "com.jack.mapper";
         MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
         mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");
-        mapperScannerConfigurer.setBasePackage(mapperLocation);
+        //设置扫描的mapper接口包
+        mapperScannerConfigurer.setBasePackage("com.jack.mapper");
         return mapperScannerConfigurer;
-    }
-
-    @Bean
-    public DataSource druidDataSource() {
-        DruidDataSource druidDataSource = new DruidDataSource();
-        druidDataSource.setUrl(environment.getProperty("spring.datasource.url"));
-        druidDataSource.setUsername(environment.getProperty("spring.datasource.username"));
-        druidDataSource.setPassword(environment.getProperty("spring.datasource.password"));
-        druidDataSource.setDriverClassName(environment.getProperty("spring.datasource.driverClassName"));
-        druidDataSource.setMaxActive(Integer.parseInt(environment.getProperty("spring.datasource.maxActive")));
-        druidDataSource.setInitialSize(Integer.parseInt(environment.getProperty("spring.datasource.initialSize")));
-        druidDataSource.setMaxWait(Long.parseLong(environment.getProperty("spring.datasource.maxWait")));
-        druidDataSource.setMinIdle(Integer.parseInt(environment.getProperty("spring.datasource.minIdle")));
-        druidDataSource.setTimeBetweenEvictionRunsMillis(Long.parseLong(environment.getProperty("spring.datasource.timeBetweenEvictionRunsMillis")));
-        druidDataSource.setMinEvictableIdleTimeMillis(Long.parseLong(environment.getProperty("spring.datasource.minEvictableIdleTimeMillis")));
-        druidDataSource.setValidationQuery(environment.getProperty("spring.datasource.validationQuery"));
-        druidDataSource.setTestWhileIdle(Boolean.parseBoolean(environment.getProperty("spring.datasource.testWhileIdle")));
-        druidDataSource.setTestOnBorrow(Boolean.parseBoolean(environment.getProperty("spring.datasource.testOnBorrow")));
-        druidDataSource.setTestOnReturn(Boolean.parseBoolean(environment.getProperty("spring.datasource.testOnReturn")));
-        druidDataSource.setPoolPreparedStatements(Boolean.parseBoolean(environment.getProperty("spring.datasource.poolPreparedStatements")));
-        druidDataSource.setMaxOpenPreparedStatements(Integer.parseInt(environment.getProperty("spring.datasource.maxOpenPreparedStatements")));
-        return druidDataSource;
     }
 
     @Override

@@ -3,26 +3,28 @@ package com.jack.config;
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 
 /**
  * Created by jack on 2017/12/26.
  */
-//@Configuration
-//@EnableTransactionManagement
+@Configuration
+@EnableTransactionManagement
 public class DruidDataSourceConfig {
     /**
      * 注入环境变量的值
      */
-   /* @Autowired
-    private Environment environment;*/
+    @Autowired
+    private Environment environment;
     /**
-     * 获取数据源DataSource
+     * 获取阿里数据源DataSource
      * @return
      */
-    /*@Bean
+    @Bean
     public DataSource druidDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setUrl(environment.getProperty("spring.datasource.url"));
@@ -42,5 +44,5 @@ public class DruidDataSourceConfig {
         druidDataSource.setPoolPreparedStatements(Boolean.parseBoolean(environment.getProperty("spring.datasource.poolPreparedStatements")));
         druidDataSource.setMaxOpenPreparedStatements(Integer.parseInt(environment.getProperty("spring.datasource.maxOpenPreparedStatements")));
         return druidDataSource;
-    }*/
+    }
 }
