@@ -8,7 +8,7 @@ spring:
     url: jdbc:mysql://localhost:3306/jack?characterEncoding=utf8&useSSL=true
     username: root
     password: root
-    #ʹ��druid����Դ
+    #druid数据库连接池配置
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
     filters: stat
