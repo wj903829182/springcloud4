@@ -37,8 +37,8 @@ public class StudentController {
         //entityWrapper.eq("name","jackmapper1");
         //List<Student> students = iStudentService.selectList(entityWrapper);
         //List<Student> students = iStudentService.selectPage(new Page<Student>(1,2), entityWrapper).getRecords();
-        //Student student = iStudentService.findStudentById(9);
-        Student student = iStudentService.findStudentById2(8);
+        Student student = iStudentService.findStudentById(9);
+        //Student student = iStudentService.findStudentById2(8);
         JSONObject result  = new JSONObject();
         result.put("students",student);
         return result;
