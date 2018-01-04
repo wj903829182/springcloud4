@@ -60,3 +60,8 @@ mybatis-plus:
 logging:
   level: warn
 
+test:
+  name: jack
+  age: 22
+  address: 深圳
+

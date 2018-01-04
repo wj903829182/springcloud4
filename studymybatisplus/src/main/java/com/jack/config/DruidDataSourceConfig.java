@@ -1,6 +1,7 @@
 package com.jack.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +21,8 @@ public class DruidDataSourceConfig {
      */
     @Autowired
     private Environment environment;
+    @Autowired
+    private TestConfig testConfig;
     /**
      * 获取阿里数据源DataSource
      * @return
@@ -43,6 +46,7 @@ public class DruidDataSourceConfig {
         druidDataSource.setTestOnReturn(Boolean.parseBoolean(environment.getProperty("spring.datasource.testOnReturn")));
         druidDataSource.setPoolPreparedStatements(Boolean.parseBoolean(environment.getProperty("spring.datasource.poolPreparedStatements")));
         druidDataSource.setMaxOpenPreparedStatements(Integer.parseInt(environment.getProperty("spring.datasource.maxOpenPreparedStatements")));
+        System.out.println("testConfig-----------"+ JSONObject.toJSON(testConfig));
         return druidDataSource;
     }
 }
