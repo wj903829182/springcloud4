@@ -16,12 +16,24 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
         firstMessage.writeBytes(req);
     }
 
+    /**
+     * 当客户端和服务端TCP链路建立成功之后，Netty的NIO线程会调用channelActive方法，发送查询时间的指令给服务器
+     * @param ctx
+     * @throws Exception
+     */
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         //super.channelActive(ctx);
+        //将请求的消息发送给服务器
         ctx.writeAndFlush(firstMessage);
     }
 
+    /**
+     * 当服务端返回应答消息时，channelRead方法会被调用
+     * @param ctx
+     * @param msg
+     * @throws Exception
+     */
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         //super.channelRead(ctx, msg);
