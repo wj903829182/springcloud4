@@ -7,24 +7,25 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-import java.util.concurrent.locks.ReentrantLock;
-
 /**
  * Created by jack on 2018/1/6.
  */
 public class TimeServerNetty {
 
     public void bind(int port) throws Exception{
-        //配置服务端的NIO线程组
+        //配置服务端的NIO线程组,专门用于网络事件的处理，这里创建两个的原因是一个用于服务端接收客户端的连接，
+        //另外一个用于进行SocketChannel的网络读写
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
+            //创建ServerBootstrap对象，是Netty用于启动NIO服务端的辅助启动类
             ServerBootstrap bootstrap = new ServerBootstrap();
+            //将两个NIO线程组当作入参传到ServerBootstrap对象中
             bootstrap.group(bossGroup,workerGroup)
                 .channel(NioServerSocketChannel.class)
-                .option(ChannelOption.SO_BACKLOG,2014)
-                .childHandler(new ChildChannelHandler());
-            //绑定端口，同步等待成功
+                .option(ChannelOption.SO_BACKLOG,2014)//配置NioServerSocketChannel的TCP参数此处将backlog设置为1024
+                .childHandler(new ChildChannelHandler());//绑定IO事件的处理类，主要用于处理网络I/O事件，比如，记录日志，对消息进行编码
+            //绑定端口，同步等待成功，返回ChannelFuture，用于异步操作的通知回调
             ChannelFuture channelFuture = bootstrap.bind(port).sync();
             //等待服务端监听端口关闭
             channelFuture.channel().closeFuture().sync();
