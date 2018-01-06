@@ -28,7 +28,7 @@ public class TimeClientNetty {
                             socketChannel.pipeline().addLast(new TimeClientHandler());
                         }
                     });
-            //发起异步连接操作
+            //发起同步连接操作
             ChannelFuture channelFuture = bootstrap.connect(host,port).sync();
             //等待客户端链路关闭
             channelFuture.channel().closeFuture().sync();
