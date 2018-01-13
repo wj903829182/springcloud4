@@ -1,0 +1,21 @@
+server:
+  port: 7010
+
+spring:
+  application:
+    name: zuulgateway
+
+eureka:
+ client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
+
+
+
+
+
+
+
+
