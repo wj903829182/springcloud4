@@ -2,7 +2,6 @@ package com.jack.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jack.util.RequestResultUtil;
-import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +17,9 @@ public class LoginController {
         if (username == null || "".equals(username) || password == null || "".equals(password)) {
             return RequestResultUtil.fail("用户名或者密码错误");
         }
-        return RequestResultUtil.success();
+        if ("jack".equals(username) && "123456".equals(password)) {
+            return RequestResultUtil.success("login success");
+        }
+        return RequestResultUtil.fail("用户名或者密码错误");
     }
 }
