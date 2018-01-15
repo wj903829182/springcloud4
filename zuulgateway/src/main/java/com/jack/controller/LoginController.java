@@ -16,7 +16,7 @@ import javax.servlet.http.HttpSession;
  * Created by jack on 2018/1/13.
  */
 @RestController
-@RequestMapping("zuul")
+@RequestMapping("/logincontroller")
 public class LoginController {
     @RequestMapping(value = "/login",method = RequestMethod.POST)
     public JSONObject login(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
