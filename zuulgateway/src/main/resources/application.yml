@@ -13,6 +13,9 @@ eureka:
       defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
 
 
+zuul:
+  sensitive-headers: #"*"   #解决通过网关调用其他模块，每次其他模块都产生新的sessionId的问题
+
 
 
 
