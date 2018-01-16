@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -17,7 +18,12 @@ public class TestController {
     public JSONObject zuulTest(HttpServletRequest request){
         JSONObject result = new JSONObject();
         result.put("success","通过网关调用成功");
-        System.out.println("zuulTest seesion id is : "+request.getSession().getId());
+        result.put("sessionId",request.getSession().getId());
+        Cookie [] cookies = request.getCookies();
+        result.put("cookies",cookies);
+        System.out.println("模块的 seesion id is : "+request.getSession().getId());
+        System.out.println("模块的 cookies is : "+JSONObject.toJSON(cookies));
+        result.put("sessionInfo",request.getSession().getAttribute("sessionInfo"));
         return result;
     }
 }
