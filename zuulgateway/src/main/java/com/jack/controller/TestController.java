@@ -21,6 +21,10 @@ public class TestController {
         Cookie [] cookies = request.getCookies();
         System.out.println("the getSessionId method cookies is : "+JSONObject.toJSON(cookies));
         System.out.println("the getSessionId method session id is : "+request.getSession().getId());
-        return RequestResultUtil.success(cookies);
+        System.out.println("sessionInfo msg is :"+request.getSession().getAttribute("sessionInfo"));
+        JSONObject result = new JSONObject();
+        result.put("cookies",cookies);
+        result.put("sessionInfo",request.getSession().getAttribute("sessionInfo"));
+        return RequestResultUtil.success(result);
     }
 }

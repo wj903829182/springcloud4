@@ -33,6 +33,7 @@ public class LoginController {
         SessionInfo sessionInfo = new SessionInfo();
         Cookie [] cookies = request.getCookies();
         if (cookies != null) {
+            System.out.println("cookies 已经存在...........................");
             RequestResultUtil.success("cookies已经存在");
         }
         if ("jack".equals(username) && "123456".equals(password)) {
@@ -43,8 +44,9 @@ public class LoginController {
             //String sessionId = session.getId();
             Cookie cookie = new Cookie("sessionId",httpSession.getId());//sessionId默认是存放在一个name为mySessionId里面的
             cookie.setPath("/");
-            cookie.setMaxAge(30 * 60);// 以秒为单位，所以为30分钟
+            cookie.setMaxAge(5 * 60);// 以秒为单位，所以为30分钟
             response.addCookie(cookie);
+            httpSession.setAttribute("sessionInfo",sessionInfo);
 
             return RequestResultUtil.success(sessionInfo);
         }

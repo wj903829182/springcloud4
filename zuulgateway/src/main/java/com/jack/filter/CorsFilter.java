@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by xiangfei on 2017/10/16.
  */
-@Component
+//@Component
 public class CorsFilter implements Filter {
     final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(CorsFilter.class);
 
@@ -19,7 +19,8 @@ public class CorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
 
         System.err.println("the origin is : " + request.getHeader("origin"));
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        //response.setHeader("Access-Control-Allow-Origin", request.getHeader("origin"));
+        response.setHeader("Access-Control-Allow-Origin", "*");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE, PUT");
         response.setHeader("Access-Control-Max-Age", "3600");
