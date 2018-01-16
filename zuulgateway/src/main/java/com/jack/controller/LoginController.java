@@ -42,11 +42,12 @@ public class LoginController {
             //HttpSession session = request.getSession(true);
             //session.setAttribute("key", "value");
             //String sessionId = session.getId();
-            Cookie cookie = new Cookie("sessionId",httpSession.getId());//sessionId默认是存放在一个name为mySessionId里面的
+            //JSESSIONID
+            Cookie cookie = new Cookie("JSESSIONID",httpSession.getId());//sessionId默认是存放在一个name为mySessionId里面的
             cookie.setPath("/");
-            cookie.setMaxAge(5 * 60);// 以秒为单位，所以为30分钟
+            cookie.setMaxAge(10 * 60);// 以秒为单位，所以为30分钟
             response.addCookie(cookie);
-            httpSession.setAttribute("sessionInfo",sessionInfo);
+            //httpSession.setAttribute("sessionInfo",sessionInfo);
 
             return RequestResultUtil.success(sessionInfo);
         }

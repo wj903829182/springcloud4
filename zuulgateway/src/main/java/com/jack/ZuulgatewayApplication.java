@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -12,6 +13,7 @@ import org.springframework.web.filter.CorsFilter;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableZuulProxy
+@EnableRedisHttpSession
 public class ZuulgatewayApplication {
 
 	public static void main(String[] args) {
@@ -25,16 +27,16 @@ public class ZuulgatewayApplication {
 		config.setAllowCredentials(true);
 		config.addAllowedOrigin("*");
 		config.addAllowedHeader("*");
-		config.addAllowedMethod("OPTIONS");
-		config.addAllowedMethod("HEAD");
-		config.addAllowedMethod("GET");
-		config.addAllowedMethod("PUT");
-		config.addAllowedMethod("POST");
-		config.addAllowedMethod("DELETE");
-		config.addAllowedMethod("PATCH");
-		config.setAllowCredentials(true);
+		//config.addAllowedMethod("OPTIONS");
+		//config.addAllowedMethod("HEAD");
+		//config.addAllowedMethod("GET");
+		//config.addAllowedMethod("PUT");
+		//config.addAllowedMethod("POST");
+		//config.addAllowedMethod("DELETE");
+		//config.addAllowedMethod("PATCH");
+		config.addAllowedMethod("*");
 		source.registerCorsConfiguration("/**", config);
-		return new CorsFilter(source);
-	}
+	 return new CorsFilter(source);
+	 }
 
 }

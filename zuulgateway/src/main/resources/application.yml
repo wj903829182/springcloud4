@@ -4,6 +4,14 @@ server:
 spring:
   application:
     name: zuulgateway
+  redis:
+    host:  192.168.9.202
+    database: 8
+    pool:
+      max-active: 8
+      min-idle: 1
+      max-idle: 1
+      max-wait: -1
 
 eureka:
  client:
@@ -14,7 +22,7 @@ eureka:
 
 
 zuul:
-  sensitive-headers: #"*"   #解决通过网关调用其他模块，每次其他模块都产生新的sessionId的问题
+  sensitive-headers: "*" #"*"   #解决通过网关调用其他模块，每次其他模块都产生新的sessionId的问题
 
 
 
