@@ -18,12 +18,13 @@ public class TestController {
     public JSONObject zuulTest(HttpServletRequest request){
         JSONObject result = new JSONObject();
         result.put("success","通过网关调用成功");
-        result.put("sessionId",request.getSession().getId());
+        //result.put("sessionId",request.getSession().getId());
         Cookie [] cookies = request.getCookies();
         result.put("cookies",cookies);
-        System.out.println("模块的 seesion id is : "+request.getSession().getId());
+        //System.out.println("模块的 seesion id is : "+request.getSession().getId());
         System.out.println("模块的 cookies is : "+JSONObject.toJSON(cookies));
-        result.put("sessionInfo",request.getSession().getAttribute("sessionInfo"));
+        result.put("sessionInfo",request.getSession().getId());
+        System.out.println("zuulTest session Id is : "+request.getSession().getId());
         return result;
     }
 }
