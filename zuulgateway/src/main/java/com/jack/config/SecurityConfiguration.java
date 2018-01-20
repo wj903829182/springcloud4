@@ -5,10 +5,12 @@ import com.jack.pojo.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
 
@@ -71,8 +73,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //注意：这个自定义表单登录的自定义页面中的登录名参数必须被命名为username密码参数必须被命名为password
                 //.loginPage("/page/test")
                 //指定登录成功后跳转到/index页面
-                .usernameParameter("username")//自定义用户名参数名称
-                .passwordParameter("password")//自定义密码参数名称
+                //.usernameParameter("username")//自定义用户名参数名称
+                //.passwordParameter("password")//自定义密码参数名称
                 .defaultSuccessUrl("/page/index")
                 //指定登录失败后跳转到/login?error页面
                 .failureUrl("/page/fail")
@@ -106,9 +108,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //密码使用BCryptPasswordEncoder()方法验证，因为这里使用了BCryptPasswordEncoder()方法验证。
         // 所以在注册用户的时候在接收前台明文密码之后也需要使用BCryptPasswordEncoder().encode(明文密码)方法加密密码。
                // .passwordEncoder(new BCryptPasswordEncoder());
-        //auth.userDetailsService(new MyUserDetailsService());
-        auth.inMemoryAuthentication().withUser("jack").password("123456").roles("user")
-                .and().withUser("jack1").password("123456").roles("user");
+        //auth.userDetailsService(new MyUserDetailsService()).passwordEncoder(new Md5PasswordEncoder());
+        auth.userDetailsService(new MyUserDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+        /*auth.inMemoryAuthentication().withUser("jack").password("123456").roles("user")
+                .and().withUser("jack1").password("123456").roles("user")
+                .passwordEncoder(new Md5PasswordEncoder());*/
 
     }
 
