@@ -75,7 +75,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //指定登录成功后跳转到/index页面
                 //.usernameParameter("username")//自定义用户名参数名称
                 //.passwordParameter("password")//自定义密码参数名称
-                .defaultSuccessUrl("/page/index")
+                .defaultSuccessUrl("/page/wx")
                 //指定登录失败后跳转到/login?error页面
                 .failureUrl("/page/fail")
                 .permitAll()
@@ -109,7 +109,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         // 所以在注册用户的时候在接收前台明文密码之后也需要使用BCryptPasswordEncoder().encode(明文密码)方法加密密码。
                // .passwordEncoder(new BCryptPasswordEncoder());
         //auth.userDetailsService(new MyUserDetailsService()).passwordEncoder(new Md5PasswordEncoder());
-        auth.userDetailsService(new MyUserDetailsService()).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(new MyUserDetailsService());//.passwordEncoder(new BCryptPasswordEncoder());
         /*auth.inMemoryAuthentication().withUser("jack").password("123456").roles("user")
                 .and().withUser("jack1").password("123456").roles("user")
                 .passwordEncoder(new Md5PasswordEncoder());*/

@@ -32,11 +32,11 @@ public class LoginController {
         return "forward:xx.html";
     }
 
-    @GetMapping(value = "/index")
+    @GetMapping(value = "/wx")
     //@ResponseBody
     public String loginIndex(){
-        System.out.println("url -----------index");
-        return "forward:xx.html";
+        System.out.println("url -----------wx");
+        return "redirect:http://localhost:8005/vuestudy2/html/wx.html";
     }
 
 
