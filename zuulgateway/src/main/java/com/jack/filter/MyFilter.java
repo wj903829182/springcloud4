@@ -10,9 +10,9 @@ import java.io.IOException;
 /**
  * Created by xiangfei on 2017/10/16.
  */
-//@Component
-public class CorsFilter implements Filter {
-    final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(CorsFilter.class);
+@Component
+public class MyFilter implements Filter {
+    final static org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(MyFilter.class);
 
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;

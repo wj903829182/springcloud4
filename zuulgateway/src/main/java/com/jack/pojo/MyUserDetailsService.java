@@ -16,6 +16,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = null;
+        System.out.println("username === "+username);
         if ("jack".equals(username)) {
             user = new User();
             user.setUsername("jack");

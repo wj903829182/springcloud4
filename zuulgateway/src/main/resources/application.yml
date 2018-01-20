@@ -23,6 +23,9 @@ eureka:
 
 zuul:
   sensitive-headers: "*" #"*"   #解决通过网关调用其他模块，每次其他模块都产生新的sessionId的问题
+logging:
+  level:
+    logging.level.org.springframework.security: info
 
 
 
