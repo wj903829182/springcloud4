@@ -16,7 +16,7 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = null;
-        System.out.println("登入用户的用户名：username === "+username);
+        System.out.println("用于登入用户的用户名：username === "+username);
         if ("jack".equals(username)) {
             user = new User();
             user.setUsername("jack");

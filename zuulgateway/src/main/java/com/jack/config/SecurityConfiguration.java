@@ -1,5 +1,6 @@
 package com.jack.config;
 
+import com.alibaba.fastjson.JSON;
 import com.jack.filter.MyFilter;
 import com.jack.pojo.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsUtils;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.OutputStream;
 
 /**
  * Created by jack on 2018/1/18.
@@ -24,6 +29,10 @@ import org.springframework.web.cors.CorsUtils;
  * http://www.spring4all.com/article/428
  *
  * http://doc.spring4all.com/spring-guildes/spring-security-architecture.html
+ *
+ * http://blog.csdn.net/code__code/article/details/53885510
+ *
+ * https://www.cnblogs.com/sweetchildomine/p/5998659.html
  *
  */
 
@@ -76,6 +85,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.usernameParameter("username")//自定义用户名参数名称
                 //.passwordParameter("password")//自定义密码参数名称
                 .defaultSuccessUrl("/page/wx")
+                //.successHandler(new LoginSuccessHandler())
                 //指定登录失败后跳转到/login?error页面
                 .failureUrl("/page/fail")
                 .permitAll()
@@ -87,11 +97,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //指定登出的url
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")
-                .permitAll();
+                .permitAll()
+                .invalidateHttpSession(true);
         //关闭跨域保护
         http.csrf().disable();
         //在 beforeFilter 之前添加 filter
         http.addFilterBefore(myFilter, UsernamePasswordAuthenticationFilter.class);
+        http.exceptionHandling().authenticationEntryPoint((request, response, authException) -> {
+            //String result = JSON.toJSONString(JsonUtil.getResultJson(ResultCodeEnum.NOLOGIN));
+            //HttpHelper.setResponseJsonData(response,result);
+            String result = "未登入";
+            response.setStatus(HttpServletResponse.SC_OK);
+            response.setContentType("application/json; charset=utf-8");
+            response.setCharacterEncoding("UTF-8");
+            OutputStream out = response.getOutputStream();
+            out.write(result.getBytes("UTF-8"));
+            out.flush();
+
+        });
+        AuthenticationSuccessHandler authenticationSuccessHandler;
     }
 
     /**

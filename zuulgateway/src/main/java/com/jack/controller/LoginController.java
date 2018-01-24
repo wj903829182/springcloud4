@@ -1,8 +1,11 @@
 package com.jack.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.jack.util.RequestResultUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Created by jack on 2018/1/19.
@@ -33,10 +36,12 @@ public class LoginController {
     }
 
     @GetMapping(value = "/wx")
-    //@ResponseBody
-    public String loginIndex(){
+    @ResponseBody
+    public JSONObject loginIndex(){
         System.out.println("url -----------wx");
-        return "redirect:http://localhost:8005/vuestudy2/html/wx.html";
+        JSONObject result = new JSONObject();
+        return RequestResultUtil.success("登入成功");
+        //return "redirect:http://localhost:8005/vuestudy2/html/wx.html";
     }
 
 
