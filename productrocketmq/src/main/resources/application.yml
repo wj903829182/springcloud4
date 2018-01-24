@@ -97,6 +97,21 @@ rocketmq:
     consumeThreadMax: 64
 
 
+#http://blog.csdn.net/cl_andywin/article/details/53992353
+security:
+    #oauth2:
+      #client:
+        #client-id: qwrt-client
+        #client-secret: qwrt-secret
+        #scope: read,write
+        #auto-approve-scopes: '.*'
+        #grant-type: password
+    #user:
+        #name: jack
+        #password: jack
+        #role: USER
+    basic:
+      enabled: false
 
 
 
