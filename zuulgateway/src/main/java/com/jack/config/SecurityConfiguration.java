@@ -1,20 +1,15 @@
 package com.jack.config;
 
-import com.alibaba.fastjson.JSON;
 import com.jack.filter.MyFilter;
 import com.jack.pojo.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsUtils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.OutputStream;
@@ -95,10 +90,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 //指定登出的url
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
-                .permitAll()
-                .invalidateHttpSession(true);
+                //.logoutUrl("/logout")
+                //.logoutSuccessUrl("/login")
+                .logoutSuccessHandler(new MyLogoutSuccessHandler())
+                .deleteCookies("SESSION")
+                .permitAll();
+                //.invalidateHttpSession(true);
         //关闭跨域保护
         http.csrf().disable();
         //在 beforeFilter 之前添加 filter
@@ -107,6 +104,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             //String result = JSON.toJSONString(JsonUtil.getResultJson(ResultCodeEnum.NOLOGIN));
             //HttpHelper.setResponseJsonData(response,result);
             String result = "未登入";
+            System.out.println("------------------未进行登入");
             response.setStatus(HttpServletResponse.SC_OK);
             response.setContentType("application/json; charset=utf-8");
             response.setCharacterEncoding("UTF-8");
