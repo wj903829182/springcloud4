@@ -16,8 +16,8 @@ public class TimeServerNetty {
     public void bind(int port) throws Exception{
         //配置服务端的NIO线程组,专门用于网络事件的处理，这里创建两个的原因是一个用于服务端接收客户端的连接，
         //另外一个用于进行SocketChannel的网络读写
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
+        EventLoopGroup bossGroup = new NioEventLoopGroup();//boss用来接收进来的连接
+        EventLoopGroup workerGroup = new NioEventLoopGroup();//用来处理已经被接收的连接
         try {
             //创建ServerBootstrap对象，是Netty用于启动NIO服务端的辅助启动类
             ServerBootstrap bootstrap = new ServerBootstrap();
