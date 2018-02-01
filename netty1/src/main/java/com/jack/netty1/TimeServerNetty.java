@@ -9,6 +9,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 /**
  * Created by jack on 2018/1/6.
+ * https://www.jianshu.com/p/0bff7c020af2
  */
 public class TimeServerNetty {
 
