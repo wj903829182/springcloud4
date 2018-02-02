@@ -38,6 +38,7 @@
 	</dependencies>
 
 	<build>
+		<finalName>nettyServer</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
