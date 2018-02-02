@@ -1,0 +1,16 @@
+
+hello: world************
+server:
+  port: 9980
+
+logging:
+    level:
+        #root: DEBUG
+        root: INFO
+    config: classpath:logback.xml
+    path: /nettyserver/netty
+
+
+
+
+
